@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberture — Human Performance Platform</title>
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --bg-card: #141416;
+            --bg-hover: #1a1a1e;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --accent: #22c55e;
+            --accent-dim: #16a34a;
+            --border: #27272a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 32px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--text);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+        
+        .hero h1 span {
+            color: var(--accent);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-dim);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+        
+        /* What is section */
+        .what-is {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .what-is h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .concept-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        
+        .concept-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .concept-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Tools section */
+        .tools-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tools-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        
+        .tools-section > p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tool-card:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent);
+        }
+        
+        .tool-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .tool-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .tool-tag {
+            display: inline-block;
+            background: var(--bg);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        /* Sleep Calculator Demo */
+        .demo-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .demo-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        
+        .demo-section > p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+        
+        .calculator {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 500px;
+        }
+        
+        .calc-input {
+            margin-bottom: 24px;
+        }
+        
+        .calc-input label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .calc-input input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        
+        .calc-input input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .calc-results {
+            margin-top: 24px;
+        }
+        
+        .calc-results h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .result-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .result-card.optimal {
+            border-color: var(--accent);
+            background: rgba(34, 197, 94, 0.1);
+        }
+        
+        .result-time {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .result-meta {
+            text-align: right;
+        }
+        
+        .result-cycles {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .result-duration {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .optimal-badge {
+            background: var(--accent);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+        
+        /* Domains */
+        .domains-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .domains-section h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+        
+        .domain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .domain-card:hover {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+        
+        .domain-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .domain-card h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .domain-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--text);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-inner {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            nav a {
+                margin: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="/" class="logo">Liber<span>ture</span></a>
+            <nav>
+                <a href="#tools">Tools</a>
+                <a href="#knowledge">Knowledge</a>
+                <a href="#contribute">Contribute</a>
+                <a href="https://github.com/liberture" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Build AI for <span>Human Performance</span></h1>
+                <p>Open-source knowledge, tools, and agent skills for optimizing mind, body, and wealth. Free forever.</p>
+                <div class="hero-cta">
+                    <a href="#tools" class="btn btn-primary">Explore Tools</a>
+                    <a href="#knowledge" class="btn btn-secondary">Browse Knowledge</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="what-is">
+            <div class="container">
+                <h2>What is Liberture?</h2>
+                <p style="color: var(--text-muted); max-width: 700px;">A platform for building AI systems focused on human performance. Not another app — a foundation others can build on.</p>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>📚 Knowledge Base</h3>
+                        <p>Curated, first-principles content on sleep, nutrition, exercise, cognition, mind, and finance. Structured for humans and AI agents alike.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>🔧 Agent Skills</h3>
+                        <p>Packaged functions that AI agents can call. Sleep calculators, macro planners, breathing timers — all open source and composable.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>🤖 AI Agents</h3>
+                        <p>Specialized agents that use the knowledge + skills. Sleep coach, nutrition advisor, habit builder. Build your own or use ours.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="demo-section" id="tools">
+            <div class="container">
+                <h2>Try It: Sleep Cycle Calculator</h2>
+                <p>Enter when you need to wake up. We'll calculate optimal bedtimes based on 90-minute sleep cycles.</p>
+                
+                <div class="calculator">
+                    <div class="calc-input">
+                        <label for="wakeTime">I need to wake up at:</label>
+                        <input type="time" id="wakeTime" value="07:00">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateBedtimes()" style="width: 100%;">Calculate Bedtimes</button>
+                    
+                    <div class="calc-results" id="results">
+                        <h4>Recommended bedtimes</h4>
+                        <div id="resultCards"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tools-section">
+            <div class="container">
+                <h2>More Tools</h2>
+                <p>Interactive calculators and utilities. All open source.</p>
+                
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>🧮 Macro Calculator</h3>
+                        <p>Calculate daily protein, carbs, and fat targets based on your goals.</p>
+                        <span class="tool-tag">Nutrition</span>
+                    </div>
+                    <div class="tool-card">
+                        <h3>💪 1RM Calculator</h3>
+                        <p>Estimate your one-rep max from submaximal lifts.</p>
+                        <span class="tool-tag">Exercise</span>
+                    </div>
+                    <div class="tool-card">
+                        <h3>🫁 Breathing Timer</h3>
+                        <p>Guided box breathing, 4-7-8, and physiological sigh protocols.</p>
+                        <span class="tool-tag">Mind</span>
+                    </div>
+                    <div class="tool-card">
+                        <h3>🍅 Ultradian Pomodoro</h3>
+                        <p>Work timer aligned with 90-minute focus cycles.</p>
+                        <span class="tool-tag">Cognition</span>
+                    </div>
+                    <div class="tool-card">
+                        <h3>💧 Hydration Calc</h3>
+                        <p>Daily water intake based on weight, activity, and climate.</p>
+                        <span class="tool-tag">Nutrition</span>
+                    </div>
+                    <div class="tool-card">
+                        <h3>🔥 FIRE Calculator</h3>
+                        <p>How much you need to reach financial independence.</p>
+                        <span class="tool-tag">Finance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="domains-section" id="knowledge">
+            <div class="container">
+                <h2>Knowledge Domains</h2>
+                
+                <div class="domains-grid">
+                    <div class="domain-card">
+                        <div class="domain-icon">😴</div>
+                        <h3>Sleep</h3>
+                        <p>Cycles, recovery, circadian rhythm</p>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-icon">🥗</div>
+                        <h3>Nutrition</h3>
+                        <p>Macros, fasting, digestion</p>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-icon">🏋️</div>
+                        <h3>Exercise</h3>
+                        <p>Strength, cardio, mobility</p>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-icon">🧠</div>
+                        <h3>Cognition</h3>
+                        <p>Focus, learning, productivity</p>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-icon">🧘</div>
+                        <h3>Mind</h3>
+                        <p>Stress, meditation, resilience</p>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-icon">💰</div>
+                        <h3>Finance</h3>
+                        <p>Savings, investing, independence</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Open source. Free forever. <a href="https://github.com/liberture">GitHub</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Sleep Cycle Calculator
+        const CYCLE_DURATION = 90; // minutes
+        const FALL_ASLEEP_TIME = 15; // minutes
+        
+        function calculateBedtimes() {
+            const wakeInput = document.getElementById('wakeTime').value;
+            const [hours, minutes] = wakeInput.split(':').map(Number);
+            
+            const wakeTime = new Date();
+            wakeTime.setHours(hours, minutes, 0, 0);
+            
+            const results = [];
+            
+            [6, 5, 4].forEach(cycles => {
+                const sleepDuration = cycles * CYCLE_DURATION;
+                const totalTime = sleepDuration + FALL_ASLEEP_TIME;
+                
+                const bedtime = new Date(wakeTime.getTime() - totalTime * 60000);
+                
+                results.push({
+                    time: bedtime,
+                    cycles: cycles,
+                    duration: sleepDuration,
+                    optimal: cycles === 5
+                });
+            });
+            
+            renderResults(results);
+        }
+        
+        function renderResults(results) {
+            const container = document.getElementById('resultCards');
+            container.innerHTML = results.map(r => `
+                <div class="result-card ${r.optimal ? 'optimal' : ''}">
+                    <div>
+                        <span class="result-time">${formatTime(r.time)}</span>
+                        ${r.optimal ? '<span class="optimal-badge">Optimal</span>' : ''}
+                    </div>
+                    <div class="result-meta">
+                        <div class="result-cycles">${r.cycles} cycles</div>
+                        <div class="result-duration">${r.duration / 60}h ${r.duration % 60}m sleep</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+        }
+        
+        // Initial calculation
+        calculateBedtimes();
+    </script>
+</body>
+</html>
